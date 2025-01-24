@@ -80,6 +80,11 @@ public class Persona {
         this.profesion = profesion;
     }
 
+    @Override
+    public String toString() {
+        return this.nombre + ", " + this.apellido + ", " + this.dni + ", " + this.edad + ", " + this.ciudad + ", " + this.profesion;
+    }
+
     public String concatenar() {
         return this.nombre + " " + this.apellido;
     }
