@@ -1,6 +1,5 @@
-package org.example;
+package org.example.equipos;
 
-import java.security.PublicKey;
 import java.util.Random;
 
 public class Paciente {

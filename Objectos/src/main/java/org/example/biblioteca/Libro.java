@@ -1,4 +1,6 @@
-package org.example;
+package org.example.biblioteca;
+
+import org.example.equipos.Editorial;
 
 public class Libro {
     private String titulo;
@@ -9,6 +11,17 @@ public class Libro {
     private static int librosDisponibles;
     private Estudiante estudiantePrestado;
     private Editorial editorial;
+
+    public Libro(String titulo, String autor, Editorial editorial) {
+        this.titulo = titulo;
+        this.autor = autor;
+        cantidadLibros++;
+        id = String.format("LIB%03d", cantidadLibros);
+        disponible = true;
+        librosDisponibles++;
+        estudiantePrestado=null;
+        this.editorial = editorial;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -72,21 +85,6 @@ public class Libro {
 
     public void setEstudiantePrestado(Estudiante estudiantePrestado) {
         this.estudiantePrestado = estudiantePrestado;
-    }
-
-    public Libro(String titulo, String autor, Editorial editorial) {
-        this.titulo = titulo;
-        this.autor = autor;
-        cantidadLibros++;
-        id = String.format("LIB%03d", cantidadLibros);
-        disponible = true;
-        librosDisponibles++;
-        estudiantePrestado=null;
-        this.editorial = editorial;
-    }
-
-    public void calcularId() {
-
     }
 
     public Prestamo prestar(Estudiante estudiante) {

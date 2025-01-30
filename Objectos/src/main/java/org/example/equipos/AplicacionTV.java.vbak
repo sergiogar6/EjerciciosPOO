@@ -1,4 +1,4 @@
-package org.example.equipos;
+package org.example;
 
 public class AplicacionTV {
     public static void main(String[] args) {
