@@ -90,7 +90,7 @@ public class Persona {
     }
 
     public void imprimirInfoPersona() {
-        System.out.println(this.nombre + " " + this.apellido + " " + this.dni + " " + this.peso + " " + this.edad);
+        System.out.println(this.nombre + ", " + this.apellido + ", " + this.dni + ", " + this.edad + ", " + this.ciudad + ", " + this.profesion);
     }
 
 

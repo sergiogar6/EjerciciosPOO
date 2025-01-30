@@ -7,6 +7,8 @@ public class Libro {
     private boolean disponible;
     private static int cantidadLibros;
     private static int librosDisponibles;
+    private Estudiante estudiantePrestado;
+    private Editorial editorial;
 
     public String getTitulo() {
         return titulo;
@@ -56,63 +58,74 @@ public class Libro {
         Libro.librosDisponibles = librosDisponibles;
     }
 
-    public Libro(String titulo, String autor) {
+    public Editorial getEditorial() {
+        return editorial;
+    }
+
+    public void setEditorial(Editorial editorial) {
+        this.editorial = editorial;
+    }
+
+    public Estudiante getEstudiantePrestado() {
+        return estudiantePrestado;
+    }
+
+    public void setEstudiantePrestado(Estudiante estudiantePrestado) {
+        this.estudiantePrestado = estudiantePrestado;
+    }
+
+    public Libro(String titulo, String autor, Editorial editorial) {
         this.titulo = titulo;
         this.autor = autor;
         cantidadLibros++;
         id = String.format("LIB%03d", cantidadLibros);
         disponible = true;
         librosDisponibles++;
+        estudiantePrestado=null;
+        this.editorial = editorial;
     }
 
     public void calcularId() {
 
     }
 
-    public void prestar() {
-        if (disponible) {
+    public Prestamo prestar(Estudiante estudiante) {
+        if (disponible && estudiante.getLibrosPrestados().contains(this)) {
             disponible = false;
             librosDisponibles--;
-            System.out.println("El libro " + titulo + " ha sido prestado con exito.");
+            System.out.println("El libro " + titulo + " ha sido prestado con exito a " + estudiante.getNombre());
+            estudiantePrestado = estudiante;
+            estudiante.anadirLibro(this);
+            Prestamo prestamo = new Prestamo(estudiante, this);
+            System.out.println("Se ha generado el prestamo " + prestamo);
+            return prestamo;
+        } else if (estudiante.getLibrosPrestados().contains(this)) {
+            System.out.println("El estudiante " + estudiante.getNombre() + " ya tiene un libro prestado");
         } else {
             System.out.println("El libro " + titulo + " no esta disponible para prestar.");
         }
-
+        return null;
     }
 
-    public void devolver() {
+    public void devolver(Estudiante estudiante) {
         if (disponible) {
             System.out.println("El libro " + titulo + " no se puede devolver");
         } else {
             disponible = true;
             librosDisponibles++;
             System.out.println("El libro " + titulo + " ha sido devuelto con exito.");
+            estudiantePrestado = null;
+            estudiante.setLibrosPrestados(null);
         }
     }
 
     @Override
     public String toString() {
-        return "Titulo: " + titulo + ". Autor: " + autor + ". ID: " + id + ". Disponible: " + disponible;
+        if (estudiantePrestado != null) {
+            return "Titulo: " + titulo + ". Autor: " + autor + ". ID: " + id + ". Disponible: " + disponible + ". Estudiante prestado: " + estudiantePrestado.getNombre();
+        } else {
+            return "Titulo: " + titulo + ". Autor: " + autor + ". ID: " + id + ". Disponible: " + disponible;
+        }
     }
 
-    public static void main(String[] args) {
-        Libro libro1 = new Libro("hola", "soy");
-        Libro libro2 = new Libro("adios", "no soy");
-        Libro libro3 = new Libro("hola", "soy");
-        Libro libro4 = new Libro("adios", "no soy");
-        Libro libro5 = new Libro("hola", "soy");
-        Libro libro6 = new Libro("adios", "no soy");
-        Libro libro7 = new Libro("hola", "soy");
-        Libro libro8 = new Libro("adios", "no soy");
-        Libro libro9 = new Libro("hola", "soy");
-        Libro libro10 = new Libro("adios", "no soy");
-
-        System.out.println(libro1.getId());
-        System.out.println(libro2.getId());
-        System.out.println(libro10.getId());
-
-        libro1.prestar();
-        System.out.println(libro1.disponible);
-        libro1.devolver();
-    }
 }

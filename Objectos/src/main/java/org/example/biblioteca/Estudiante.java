@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class Estudiante {
     public final static String EMAIL_FORMAT = "^[A-Za-z0-9+_.-]+@alu.edu.gva.es$";
     public static int contadorEstudiantes = 0;
@@ -8,10 +10,12 @@ public class Estudiante {
     private String curso;
     private int nia;
     private String email;
+    private ArrayList<Libro> librosPrestados;
 
     public Estudiante(String nombre) {
         this.nombre = nombre;
         this.nia = ++contadorEstudiantes;
+        librosPrestados = new ArrayList<>();
     }
 
     public Estudiante(String nombre, String curso, String email) {
@@ -19,6 +23,7 @@ public class Estudiante {
         this.curso = curso;
         this.email = email;
         nia = ++contadorEstudiantes;
+        librosPrestados = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -45,9 +50,30 @@ public class Estudiante {
         this.email = email;
     }
 
+    public ArrayList<Libro> getLibrosPrestados() {
+        return librosPrestados;
+    }
+
+    public void setLibrosPrestados(ArrayList<Libro> librosPrestados) {
+        this.librosPrestados = librosPrestados;
+    }
+
+    public void anadirLibro(Libro libro) {
+        librosPrestados.add(libro);
+    }
+
+    public void eliminarLibro(Libro libro) {
+        librosPrestados.remove(libro);
+    }
+
     @Override
     public String toString() {
-        return nombre + ", " + curso + ", " + nia + ", " + email;
+        if (librosPrestados.isEmpty()) {
+            return nombre + ", " + curso + ", " + nia + ", " + email;
+        } else {
+            return nombre + ", " + curso + ", " + nia + ", " + email + ". Libro prestado: " + librosPrestados;
+        }
+
     }
 
     public static int obtenerTotalEstudiantes() {
