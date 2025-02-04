@@ -1,4 +1,4 @@
-package org.example.equipos;
+package org.example.biblioteca;
 
 public class Editorial {
     private String nombre;

@@ -1,7 +1,5 @@
 package org.example.biblioteca;
 
-import org.example.equipos.Editorial;
-
 public class Libro {
     private String titulo;
     private String autor;

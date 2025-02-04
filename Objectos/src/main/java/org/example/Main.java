@@ -3,7 +3,7 @@ package org.example;
 import org.example.biblioteca.Estudiante;
 import org.example.biblioteca.Libro;
 import org.example.biblioteca.Prestamo;
-import org.example.equipos.Editorial;
+import org.example.biblioteca.Editorial;
 
 public class Main {
     public static void main(String[] args) {
@@ -87,7 +87,6 @@ public class Main {
         Prestamo prestamo = libro1.prestar(estudiante);
 
         libro1.prestar(estudiante);
-        System.out.println(libro1.disponible);
         libro1.devolver(estudiante);
     }
   }
