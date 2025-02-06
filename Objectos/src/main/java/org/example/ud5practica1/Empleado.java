@@ -1,8 +1,5 @@
 package org.example.ud5practica1;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Empleado {
     private String id;
     private String nombre;
@@ -10,11 +7,21 @@ public class Empleado {
     private Empleado director;
     private static int countEmpleado = 0;
 
-    public Empleado(String nombre, Empleado director) {
+    //Constructor para empleados que si se le pasar el director del programa como parametro
+    public Empleado(String nombre, String cargo, Empleado director) {
         countEmpleado++;
         this.id = String.format("EP%03d", countEmpleado);
         this.nombre = nombre;
-        this.cargo = "pte";
+        setCargo(cargo);
+        this.director = director;
+    }
+
+    //Constructor para DIRECTORES que pondra el atributo director en null ya que el es el director
+    public Empleado(String nombre, String cargo) {
+        countEmpleado++;
+        this.id = String.format("EP%03d", countEmpleado);
+        this.nombre = nombre;
+        setCargo(cargo);
         this.director = null;
     }
 
@@ -38,8 +45,14 @@ public class Empleado {
         return cargo;
     }
 
+    //set del cargo con comprobacion de que sea un cargo valido, en caso de no serlo se pone el valor por defecto "pte"
     public void setCargo(String cargo) {
-        this.cargo = cargo;
+        if (cargo.equalsIgnoreCase("director") || cargo.equalsIgnoreCase("tecnico") || cargo.equalsIgnoreCase("presentador") || cargo.equalsIgnoreCase("colaborador")) {
+            this.cargo = cargo;
+        } else {
+            this.cargo = "pte";
+        }
+
     }
 
     public Empleado getDirector() {
@@ -57,12 +70,9 @@ public class Empleado {
                 ", nombre='" + nombre + '\'' +
                 ", cargo='" + cargo + '\'' +
                 ", director=" + director +
-                ", countEmpleado=" + countEmpleado +
+                ", Id empleado=" + countEmpleado +
                 '}';
     }
 
-    public void asignarDirector(Empleado director) {
-        this.director = director;
-    }
 
 }

@@ -1,0 +1,104 @@
+@startuml
+' --------------------
+' Definición de Clases
+' --------------------
+
+class Cadena {
+  - nombre: String
+  - listaProgramas: ArrayList<Programa>
+  + Cadena(nombre: String)
+  + getNombre(): String
+  + setNombre(nombre: String)
+  + getListaProgramas(): ArrayList<Programa>
+  + setListaProgramas(listaProgramas: ArrayList<Programa>)
+  + agregarPrograma(programa: Programa)
+  + toString(): String
+}
+
+class Programa {
+  - nombre: String
+  - cadena: Cadena
+  - temporadas: int
+  - director: Empleado
+  - listaEmpleados: ArrayList<Empleado>
+  - listaInvitados: ArrayList<Invitado>
+  + Programa(nombre: String, cadena: Cadena, nombreDirector: String)
+  + getNombre(): String
+  + setNombre(nombre: String)
+  + getCadena(): Cadena
+  + setCadena(cadena: Cadena)
+  + getTemporadas(): int
+  + setTemporadas(temporadas: int)
+  + getListaEmpleados(): ArrayList<Empleado>
+  + setListaEmpleados(listaEmpleados: ArrayList<Empleado>)
+  + getListaInvitados(): ArrayList<Invitado>
+  + setListaInvitados(listaInvitados: ArrayList<Invitado>)
+  + getDirector(): Empleado
+  + setDirector(director: Empleado)
+  + agregarDirector(nombre: String, cargo: String)
+  + agregarEmpleado(nombre: String, cargo: String, director: Empleado)
+  + mostrarEmpleado()
+  + agregarInvitado(nombre: String, profesion: String, temporada: int)
+  + mostrarInvitado()
+  + invitadosTemporada(temporada: int): int
+  + vecesInvitado(nombre: String): int
+  + rastrearInvitado(nombre: String)
+  + buscarInvitado(nombre: String): boolean
+  + invitadoAntes(nombre: String, programa1: Programa, programa2: Programa)
+  + primerPrograma(nombre: String): LocalDate
+  + toString(): String
+}
+
+class Empleado {
+  - id: String
+  - nombre: String
+  - cargo: String
+  - director: Empleado
+  - countEmpleado: int {static}
+  + Empleado(nombre: String, cargo: String, director: Empleado)
+  + Empleado(nombre: String, cargo: String)
+  + getId(): String
+  + setId(id: String)
+  + getNombre(): String
+  + setNombre(nombre: String)
+  + getCargo(): String
+  + setCargo(cargo: String)
+  + getDirector(): Empleado
+  + setDirector(director: Empleado)
+  + toString(): String
+}
+
+class Invitado {
+  - entry: Scanner
+  - nombre: String
+  - profesion: String
+  - fecha_visita: LocalDate
+  - temporada: int
+  + Invitado(nombre: String, profesion: String, temporada: int)
+  + getNombre(): String
+  + setNombre(nombre: String)
+  + getProfesion(): String
+  + setProfesion(profesion: String)
+  + getFecha_visita(): LocalDate
+  + setFecha_visita()
+  + getTemporada(): int
+  + setTemporada(temporada: int)
+  + toString(): String
+}
+
+' --------------------
+' Relaciones entre Clases
+' --------------------
+
+' Cadena tiene una relación de agregación con Programa (bidireccional)
+Cadena "1" o-- "0..*" Programa : listaProgramas
+Programa --> "1" Cadena : cadena
+
+' Programa contiene a los empleados e invitados (composición)
+Programa *-- "0..*" Empleado : listaEmpleados
+Programa *-- "0..*" Invitado : listaInvitados
+
+' Un empleado (que no es director) tiene como director a otro empleado
+Empleado --> Empleado : director
+
+@enduml

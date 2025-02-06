@@ -27,6 +27,10 @@ public class Cadena {
         this.listaProgramas = listaProgramas;
     }
 
+    public void agregarPrograma(Programa programa) {
+        listaProgramas.add(programa);
+    }
+
     @Override
     public String toString() {
         return "Cadena: " + nombre + ". Lista programas: " + listaProgramas;

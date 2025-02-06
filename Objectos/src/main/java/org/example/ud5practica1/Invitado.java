@@ -13,7 +13,7 @@ public class Invitado {
     public Invitado(String nombre, String profesion, int temporada) {
         this.nombre = nombre;
         this.profesion = profesion;
-        setFecha_visita(fecha_visita);
+        setFecha_visita();
         this.temporada = temporada;
     }
 
@@ -37,7 +37,8 @@ public class Invitado {
         return fecha_visita;
     }
 
-    public void setFecha_visita(LocalDate fecha_visita) {
+    //Guarda variable de año, mes y dia y con LocalDate.of() lo define el fecha_visita
+    public void setFecha_visita() {
         System.out.println("Introduce el año en el que acudira el invitado " + this.nombre + ":");
         int anyo = entry.nextInt();
         System.out.println("Introduce el mes:");

@@ -10,7 +10,6 @@ public class AppCasa {
 
         casa.mostrarHabitaciones();
 
-        casa.getHabitaciones().get(0).agregarElectrodomestico("");
 
         System.out.println(casa.getHabitacionMasGrande());
         System.out.println(casa.getPropietario());
