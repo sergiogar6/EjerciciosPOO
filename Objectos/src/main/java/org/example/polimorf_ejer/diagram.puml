@@ -1,0 +1,23 @@
+@startuml
+
+class Empleado {
+    +realizarTarea()
+}
+
+class Desarrollador {
+    +realizarTarea()
+}
+
+class Gerente {
+    +realizarTarea()
+}
+
+class Diseñador {
+    +realizarTarea()
+}
+
+Empleado <|-- Desarrollador
+Empleado <|-- Gerente
+Empleado <|-- Diseñador
+
+@enduml
